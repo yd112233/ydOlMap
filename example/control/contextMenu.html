@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>contextMenu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_284833_tv66lqaqwor5p14i.css">
+  <link rel="stylesheet" href="../../dist/hmap.css" type="text/css">
+  <style type="text/css">
+    html, body, #map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="../../dist/hmap.js" type="text/javascript"></script>
+<script type="text/javascript">
+  var contextMenu = {
+    itemWidth: 130,
+    itemHeight: 30,
+    items: [
+      {
+        name: "测面",
+        alias: "measureArea",
+        iconType: "iconfont",
+        icon: "icon-cemian",
+        iconColor: "#1AD3EF",
+        showLine: true,
+        items: [
+          {
+            name: "测规则面",
+            alias: "measureLength",
+            iconType: "iconfont",
+            icon: "icon-ceju",
+            iconColor: "#2994EF"
+          },
+          {
+            name: "测圆面",
+            alias: "measureLength",
+            iconType: "iconfont",
+            icon: "icon-ceju",
+            iconColor: "#F05849"
+          },
+          {
+            name: "测自由面",
+            alias: "measureLength",
+            iconType: "iconfont",
+            icon: "icon-ceju",
+            iconColor: "#1AD3EF"
+          }
+        ]
+      },
+      {
+        name: "清空地图",
+        alias: "clearMap",
+        iconType: "iconfont",
+        icon: "icon-map",
+        iconColor: "#F05849"
+      },
+      {
+        name: "搜周边",
+        alias: "circleSearch",
+        iconType: "iconfont",
+        icon: "icon-map1",
+        iconColor: "#2994EF"
+      }
+    ]
+  }
+  var Map = new HMap('map', {
+    controls: {
+      zoom: false
+    },
+    view: {
+      center: [12118909.300259633, 4086043.1061670054],
+      zoom: 5,
+    },
+    baseLayers: [
+      {
+        layerName: 'firstLayer',
+        layerType: 'OSM',
+        isDefault: true,
+        layerUrl: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      }
+    ]
+  });
+  var olControlContextMenu = new ol.control.ContextMenu(contextMenu)
+  Map.addControl(olControlContextMenu)
+  olControlContextMenu.on('item-click', function (event, data) {
+    console.log(event, data)
+  })
+</script>
+</body>
+</html>
